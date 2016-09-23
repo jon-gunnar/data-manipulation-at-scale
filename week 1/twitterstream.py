@@ -36,4 +36,5 @@ if __name__ == '__main__':
 
     my_stream_listener = MyStreamListener()
     my_stream = tweepy.Stream(auth=auth, listener=my_stream_listener)
+    # Filter for tweets containing the word "data"
     my_stream.filter(track=['data'], languages=['en'])
