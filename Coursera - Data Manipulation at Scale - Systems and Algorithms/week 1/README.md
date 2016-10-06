@@ -1,4 +1,4 @@
-#First week's assignements and solutions
+# First week's assignments and solutions
 
 ## Problem 1: Get Twitter Data
 
@@ -27,12 +27,12 @@ Solution: [week 1/frequency.py](https://github.com/jon-gunnar/data-manipulation-
 
 ## Problem 5: Which State is happiest?
 
-We were required to dermine the US state with most positive tweets.
+We were required to determine the US state with most positive tweets.
 
 Solution: [week 1/happieststate.py](https://github.com/jon-gunnar/data-manipulation-at-scale/blob/master/week%201/happieststate.py)
 
 ## Problem 6: Top ten hash tags
 
-We were required to find ten most used hashtags.
+We were required to find ten most frequently used hashtags.
 
 Solution: [week 1/toptenhashtags.py](https://github.com/jon-gunnar/data-manipulation-at-scale/blob/master/week%201/toptenhashtags.py)
