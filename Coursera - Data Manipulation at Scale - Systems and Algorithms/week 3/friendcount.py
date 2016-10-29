@@ -6,19 +6,15 @@ mr = MapReduce.MapReduce()
 
 
 def mapper(record):
-    # key: document name
-    # value: document contents
+    # record: (person, person's friend)
     key = record[0]
-    value = record[1]
-    words = value.split()
-    for w in words:
-        mr.emit_intermediate(w, key)
+    mr.emit_intermediate(key, 1)
 
 
 def reducer(key, list_of_values):
-    # key: word
-    # value: list of documents it appears in
-    mr.emit((key, list(set(list_of_values))))
+    # key: person
+    # list_of_values: 1 for each friend
+    mr.emit((key, sum(list_of_values)))
 
 
 if __name__ == '__main__':

@@ -6,16 +6,15 @@ mr = MapReduce.MapReduce()
 
 
 def mapper(record):
-    # record: (person, person's friend)
-    key = tuple(sorted(record))
-    mr.emit_intermediate(key, record)
+    # record: (sequence ID, string of nucleotides)
+    value = record[1][:-10]
+    mr.emit_intermediate('trimmed', value)
 
 
 def reducer(key, list_of_values):
-    # key: people in relationship in alphabetical order
-    # list_of_values: 1 for each relationship
-    if len(list_of_values) == 1:
-        mr.emit(list_of_values[0])
+    # key: label
+    # list_of_values: list of trimmed strings of nucleotides
+    mr.emit(list(set(list_of_values)))
 
 
 if __name__ == '__main__':

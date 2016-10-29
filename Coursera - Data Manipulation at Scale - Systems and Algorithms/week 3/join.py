@@ -1,3 +1,4 @@
+import itertools
 import sys
 
 import MapReduce
@@ -6,21 +7,22 @@ mr = MapReduce.MapReduce()
 
 
 def mapper(record):
-    # key: document identifier
-    # value: document contents
-    key = record[0]
-    value = record[1]
-    words = value.split()
-    for w in words:
-        mr.emit_intermediate(w, key)
+    # key: order id
+    key = record[1]
+    mr.emit_intermediate(key, record)
 
 
 def reducer(key, list_of_values):
-    # key: word
-    # value: list of occurrence counts
-    mr.emit((key, list_of_values))
+    # key: order id
+    # list_of_values: order details
+    joined = [p[0] + p[1] for p
+              in itertools.combinations(list_of_values, 2)
+              if p[0][0] != p[1][0]]
+
+    for line in joined:
+        mr.emit(line)
 
 
 if __name__ == '__main__':
-    inputdata = open(sys.argv[1])
-    mr.execute(inputdata, mapper, reducer)
+    with open(sys.argv[1], 'r') as input_data:
+        mr.execute(input_data, mapper, reducer)

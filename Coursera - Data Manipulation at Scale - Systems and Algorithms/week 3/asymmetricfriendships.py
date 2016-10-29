@@ -12,11 +12,10 @@ def mapper(record):
 
 
 def reducer(key, list_of_values):
-    # key: (person, person's friend)
+    # key: people in relationship in alphabetical order
     # list_of_values: 1 for each relationship
-    print(list_of_values)
-    # if sum(list_of_values) == 1:
-    #     mr.emit(key)
+    if len(list_of_values) == 1:
+        mr.emit(list_of_values[0])
 
 
 if __name__ == '__main__':
